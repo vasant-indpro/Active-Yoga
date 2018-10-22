@@ -5,7 +5,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 const poseListItem = (props) => (
     <TouchableOpacity onPress={props.onItemPressed}>
         <View style={styles.listItem}>
-            <Image resizeMode="cover" source={props.poseImage} style={styles.poseImage} />
+            <Image resizeMode="contain" source={props.poseImage} style={styles.poseImage} />
             <Text>{props.poseName}</Text>
         </View>
     </TouchableOpacity>
@@ -14,7 +14,7 @@ const poseListItem = (props) => (
 const styles = StyleSheet.create({
     listItem: {
         width: "100%",
-        marginBottom: 5,
+        marginBottom: 1,
         padding: 10,
         backgroundColor: "#eee",
         flexDirection: "row",
@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
     },
     poseImage: {
         marginRight: 8,
-        height: 50,
-        width: 50
+        height: 100,
+        width: 100
     }
 });
 

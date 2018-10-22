@@ -10,7 +10,7 @@ const poseList = props => {
             data={props.poses}
             renderItem={(info) => (
                 <PoseListItem
-                    poseName={info.item.poseName}
+                    poseName={info.item.poseName + " " + info.item.key} 
                     poseImage={info.item.poseImage}
                     onItemPressed={() => props.onItemPressed(info.item.key)} />
             )}
