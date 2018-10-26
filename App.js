@@ -7,7 +7,7 @@ import PoseList from './src/components/PoseList/PoseList';
 class PoseScreen extends React.Component {
 
   static navigationOptions = {
-    title: 'Poses',
+    title: 'Pose',
   };
 
   poses = [{
@@ -107,7 +107,7 @@ class PoseDetailsScreen extends React.Component {
 
     const { navigation } = this.props;
     const item = navigation.state.params.pose;
-    
+
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>{item}</Text>
@@ -125,7 +125,6 @@ const RootStack = createStackNavigator(
     initialRouteName: 'Pose',
   }
 );
-
 
 export default class App extends React.Component {
   render() {
