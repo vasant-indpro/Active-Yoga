@@ -1,10 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 
 import PoseList from './src/components/PoseList/PoseList';
-import yogaImage from './src/assets/yoga_2.png'
 
-export default class App extends React.Component {
+class PoseScreen extends React.Component {
+
+  static navigationOptions = {
+    title: 'Poses',
+  };
 
   poses = [{
     key: "1",
@@ -69,17 +73,15 @@ export default class App extends React.Component {
 
   posePressedHandler = key => {
 
-    selectedItem = this.poses.filter(pose => {
+    selectedPose = this.poses.filter(pose => {
       return pose.key === key;
     })
-
-    alert(selectedItem[0].poseName + " " + key + " details is not available.");
+    this.props.navigation.navigate('Details', { pose: selectedPose[0].poseName + " " + key + " details is not available." });
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Poses</Text>
         <PoseList poses={this.poses} onItemPressed={this.posePressedHandler} />
       </View>
     );
@@ -92,7 +94,41 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginTop: 40,
   },
 });
 
+class PoseDetailsScreen extends React.Component {
+
+  static navigationOptions = {
+    title: 'Pose Details',
+  };
+
+  render() {
+
+    const { navigation } = this.props;
+    const item = navigation.state.params.pose;
+    
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>{item}</Text>
+      </View>
+    );
+  }
+}
+
+const RootStack = createStackNavigator(
+  {
+    Pose: PoseScreen,
+    Details: PoseDetailsScreen,
+  },
+  {
+    initialRouteName: 'Pose',
+  }
+);
+
+
+export default class App extends React.Component {
+  render() {
+    return <RootStack />;
+  }
+}
